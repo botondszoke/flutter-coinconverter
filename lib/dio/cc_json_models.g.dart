@@ -32,8 +32,8 @@ CCAssetsInformation _$CCAssetsInformationFromJson(Map<String, dynamic> json) =>
       json['volumeUsd24Hr'] as String,
       json['priceUsd'] as String,
       json['changePercent24Hr'] as String,
-      json['vwap24Hr'] as String,
-      json['explorer'] as String,
+      json['vwap24Hr'] as String?,
+      json['explorer'] as String?,
     );
 
 Map<String, dynamic> _$CCAssetsInformationToJson(

@@ -25,8 +25,8 @@ class CCAssetsInformation {
   final String volumeUsd24Hr;
   final String priceUsd;
   final String changePercent24Hr;
-  final String vwap24Hr;
-  final String explorer;
+  final String? vwap24Hr;
+  final String? explorer;
 
   CCAssetsInformation(this.id, this.rank, this.symbol, this.name, this.supply, this.maxSupply, this.marketCapUsd, this.volumeUsd24Hr, this.priceUsd, this.changePercent24Hr, this.vwap24Hr, this.explorer);
 

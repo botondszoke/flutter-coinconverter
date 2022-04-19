@@ -1,32 +1,53 @@
-import 'package:coin_converter/dio/cc_service.dart';
-import 'package:coin_converter/ui/currency_list.dart';
-import 'package:coin_converter/model/list_repository.dart';
+
+import 'package:coin_converter/ui/list/currency_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
+import 'di/di_utils.dart';
 
 void main() {
+  initDependencies();
   WidgetsFlutterBinding.ensureInitialized();
-  final dataSource = CCService();
-
-  runApp(
-      Provider<CCService>(
-        create: (_) => dataSource,
-        child: const CoinConverterApp(),
-      ),
-  );
+  runApp(CoinConverterApp());
 }
+
+const DETAIL_PAGE = "/details";
 
 class CoinConverterApp extends StatelessWidget {
   const CoinConverterApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Coin Converter',
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-      ),
-      home: const CurrencyListPage(),
+    return FutureBuilder(
+      future: injector.allReady(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return MaterialApp(
+            title: 'Coin Converter',
+            theme: ThemeData(
+              primarySwatch: Colors.amber,
+            ),
+            home: CurrencyListPage(),
+            onGenerateRoute: (settings) {
+              final name = settings.name ?? "";
+              if (name.startsWith(DETAIL_PAGE)) {
+                return MaterialPageRoute(
+                  builder: (context) {
+                    //return CurrencyDetails(settings.arguments as int);
+                    return Container();
+                  },
+                );
+              }
+              return null;
+            },
+          );
+        }
+        return Container(
+          color: Colors.black,
+          child: Center(
+            child: CircularProgressIndicator(color: Colors.green,),
+          ),
+        );
+      },
     );
   }
 }
