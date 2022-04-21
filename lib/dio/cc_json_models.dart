@@ -35,6 +35,17 @@ class CCAssetsInformation {
 }
 
 @JsonSerializable()
+class CCAssetResponse {
+  final CCAssetsInformation data;
+  final int timestamp;
+
+  CCAssetResponse(this.data, this.timestamp);
+
+  factory CCAssetResponse.fromJson(Map<String, dynamic> json) => _$CCAssetResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$CCAssetResponseToJson(this);
+}
+
+@JsonSerializable()
 class CCRatesResponse {
   final List<CCRatesInformation> data;
   final int timestamp;

@@ -53,6 +53,18 @@ Map<String, dynamic> _$CCAssetsInformationToJson(
       'explorer': instance.explorer,
     };
 
+CCAssetResponse _$CCAssetResponseFromJson(Map<String, dynamic> json) =>
+    CCAssetResponse(
+      CCAssetsInformation.fromJson(json['data'] as Map<String, dynamic>),
+      json['timestamp'] as int,
+    );
+
+Map<String, dynamic> _$CCAssetResponseToJson(CCAssetResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+      'timestamp': instance.timestamp,
+    };
+
 CCRatesResponse _$CCRatesResponseFromJson(Map<String, dynamic> json) =>
     CCRatesResponse(
       (json['data'] as List<dynamic>)

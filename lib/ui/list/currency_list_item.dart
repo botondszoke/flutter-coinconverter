@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:coin_converter/bloc/list/currency_list_bloc.dart';
-import 'package:coin_converter/domain/model/list_model.dart';
 import 'package:coin_converter/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +37,7 @@ class _CurrencyListItemState extends State<CurrencyListItems> {
       },
       child: RefreshIndicator(
           onRefresh: () async {
-            BlocProvider.of<CurrencyListBloc>(context).add(LoadCurrenciesEvent());
+            BlocProvider.of<CurrencyListBloc>(context).add(LoadCurrenciesEvent(""));
             return _refreshCompleter.future;
           },
           child: ListView.builder(
@@ -73,8 +72,8 @@ class _CurrencyListItemState extends State<CurrencyListItems> {
                         onPressed: () {
                           Navigator.pushNamed(
                             context,
-                            DETAIL_PAGE,
-                            arguments: item.id
+                            "$DETAIL_PAGE/${item.id}",
+                            arguments: item.id,
                           );
                         })
                   ],

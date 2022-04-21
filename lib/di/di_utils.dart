@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 
+import '../bloc/details/currency_details_bloc.dart';
 import '../bloc/list/currency_list_bloc.dart';
 import '../dio/cc_api.dart';
 import '../dio/cc_network_data_source.dart';
@@ -47,9 +48,9 @@ void initDependencies() {
     ),
   );
 
-  /*injector.registerFactory(
+  injector.registerFactory(
         () => CurrencyDetailsBloc(
       injector<CurrencyInteractor>(),
     ),
-  );*/
+  );
 }

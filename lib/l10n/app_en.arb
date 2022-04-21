@@ -1,0 +1,88 @@
+{
+  "@@locale": "en",
+  "unknownCurrency": "unknown",
+  "@unknownCurrency": {
+    "description": "Unknown currency ID.",
+    "context": "CoinConverterApp"
+  },
+  "currencyListTitle": "Coin Converter",
+  "@currencyListTitle": {
+    "description": "Title of the CurrencyListPage.",
+    "context": "CurrencyListPage"
+  },
+  "snackbarLoadError": "Failed to load currencies.",
+  "@snackbarLoadError": {
+    "description": "Snackbar error message.",
+    "context": "CurrencyListPage"
+  },
+  "unknownError": "Unexpected error :( Please restart the app.",
+  "@unknownError": {
+    "description": "Unexpected error message.",
+    "context": "CurrencyListPage"
+  },
+  "moreInfoButton": "MORE INFORMATION",
+  "@moreInfoButton": {
+    "description": "Info button text",
+    "context": "CurrencyDetails"
+  },
+  "noMoreInfoText": "No further information is available.",
+  "@noMoreInfoText": {
+    "description": "Info button replacer text",
+    "context": "CurrencyDetails"
+  },
+  "unknownCurrencyError": "Unfortunately we could not get any information about this currency. Please try again.",
+  "@unknownCurrencyError": {
+    "description": "Error message of unknown currency",
+    "context": "CurrencyDetails"
+  },
+  "rank": "Rank",
+  "@rank": {
+    "description": "Text of rank",
+    "context": "CurrencyDetails"
+  },
+  "marketCap": "Market cap",
+  "@marketCap": {
+    "description": "Text of MarketCap",
+    "context": "CurrencyDetails"
+  },
+  "supply": "Available supply for trading",
+  "@supply": {
+    "description": "Text of supply",
+    "context": "CurrencyDetails"
+  },
+  "volume": "Trading volume",
+  "@volume": {
+    "description": "Text of volume",
+    "context": "CurrencyDetails"
+  },
+  "change": "Change",
+  "@change": {
+    "description": "Text of change",
+    "context": "CurrencyDetails"
+  },
+  "vwap": "Volume Weighted Average Price",
+  "@vwap": {
+    "description": "Text of vwap",
+    "context": "CurrencyDetails"
+  },
+  "detailDescription": "These stats are based on last 24 hours' data.",
+  "@detailDescription": {
+    "description": "Description of CurrencyDetails page content",
+    "context": "CurrencyDetails"
+  },
+  "selectCurrency": "Show data in",
+  "@selectCurrency": {
+    "description": "Text of presentCurrency",
+    "context": "CurrencyDetails"
+  },
+  "notAvailable": "Not available",
+  "@notAvailable": {
+    "description": "Unavailable attribute",
+    "context": "CurrencyDetails"
+  },
+  "price": "Price",
+  "@price": {
+    "description": "Text of price",
+    "context": "CurrencyDetails"
+  }
+}

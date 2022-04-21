@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -17,13 +15,14 @@ class CurrencyListBloc extends Bloc<CurrencyListEvent, CurrencyListState> {
       this._currencyInteractor
       ) : super(Loading()) {
     on<LoadCurrenciesEvent> ((event, emit) async {
+      emit(Loading());
       try {
-        final currencies = await _currencyInteractor.getCurrencies();
+        final currencies = await _currencyInteractor.getCurrencies(event.searchParam);
         print("Loading currencies successfully finished");
-        emit(Loaded(currencies: currencies));
+        emit(Loaded(currencies: currencies, searchParam: event.searchParam));
       } on Exception catch (e) {
         print("Loading currencies successfully failed. ${e.toString()}");
-        emit(Error(currencies: []));
+        emit(Error(currencies: [], searchParam: event.searchParam));
       }
     },);
   }

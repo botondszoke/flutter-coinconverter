@@ -6,17 +6,7 @@ abstract class CurrencyListEvent {
 }
 
 class LoadCurrenciesEvent extends CurrencyListEvent {
-  static final LoadCurrenciesEvent _instance = LoadCurrenciesEvent._();
+  final String searchParam;
 
-  factory LoadCurrenciesEvent() => _instance;
-
-  LoadCurrenciesEvent._();
+  LoadCurrenciesEvent(this.searchParam);
 }
-
-/*class RefreshCurrenciesEvent extends CurrencyListEvent {
-  static final RefreshCurrenciesEvent _instance = RefreshCurrenciesEvent._();
-
-  factory RefreshCurrenciesEvent() => _instance;
-
-  RefreshCurrenciesEvent._();
-}*/

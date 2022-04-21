@@ -7,9 +7,16 @@ class CurrencyInteractor {
 
   CurrencyInteractor(this._currencyNetworkDataSource);
 
-  Future<List<CoinCurrencyItem>> getCurrencies() async {
-    return await _currencyNetworkDataSource.getCurrencies() ?? [];
+  Future<List<CoinCurrencyItem>> getCurrencies(String searchParam) async {
+    return await _currencyNetworkDataSource.getCurrencies(searchParam);
   }
 
+  Future<CoinCurrencyItem> getCurrencyById(String id) async {
+    return await _currencyNetworkDataSource.getCurrencyById(id);
+  }
+
+  Future<List<PresentCurrency>> getRates() async {
+    return await _currencyNetworkDataSource.getRates();
+  }
 
 }
