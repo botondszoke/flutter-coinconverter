@@ -10,3 +10,9 @@ class LoadCurrenciesEvent extends CurrencyListEvent {
 
   LoadCurrenciesEvent(this.searchParam);
 }
+
+class RefreshCurrenciesEvent extends CurrencyListEvent {
+  final String searchParam;
+
+  RefreshCurrenciesEvent(this.searchParam);
+}

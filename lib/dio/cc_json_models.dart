@@ -19,12 +19,12 @@ class CCAssetsInformation {
   final String rank;
   final String symbol;
   final String name;
-  final String supply;
+  final String? supply;
   final String? maxSupply;
-  final String marketCapUsd;
-  final String volumeUsd24Hr;
+  final String? marketCapUsd;
+  final String? volumeUsd24Hr;
   final String priceUsd;
-  final String changePercent24Hr;
+  final String? changePercent24Hr;
   final String? vwap24Hr;
   final String? explorer;
 

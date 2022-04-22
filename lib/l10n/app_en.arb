@@ -84,5 +84,20 @@
   "@price": {
     "description": "Text of price",
     "context": "CurrencyDetails"
+  },
+  "search": "Search",
+  "@search": {
+    "description": "Search text",
+    "context": "CurrencyListPage"
+  },
+  "searchDialog": "Search for cryptocurrency",
+  "@searchDialog": {
+    "description": "Alert dialog title",
+    "context": "CurrencyListPage"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button",
+    "context": "CurrencyListPage"
   }
 }

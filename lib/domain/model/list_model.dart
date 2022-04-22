@@ -5,12 +5,12 @@ class CoinCurrencyItem extends Equatable {
   final num rank;
   final String symbol;
   final String name;
-  final num supply;
+  final num? supply;
   final num? maxSupply;
-  final num marketCapUsd;
-  final num volumeUsd24Hr;
+  final num? marketCapUsd;
+  final num? volumeUsd24Hr;
   final num priceUsd;
-  final num changePercent24Hr;
+  final num? changePercent24Hr;
   final num? vwap24Hr;
   final String? explorer;
 
@@ -28,14 +28,16 @@ class CoinCurrencyItem extends Equatable {
     return presentedPrice;
   }
 
-  num getPresentedVolume() {
-    num presentedVolume = volumeUsd24Hr / presentedCurrency.rateUsd;
+  num? getPresentedVolume() {
+    if (volumeUsd24Hr == null) return null;
+    num presentedVolume = num.parse(volumeUsd24Hr.toString()) / presentedCurrency.rateUsd;
     presentedVolume = num.parse(presentedVolume.toStringAsFixed(4));
     return presentedVolume;
   }
 
-  num getPresentedMarketCap() {
-    num presentedCap = marketCapUsd / presentedCurrency.rateUsd;
+  num? getPresentedMarketCap() {
+    if (marketCapUsd == null) return null;
+    num presentedCap = num.parse(marketCapUsd.toString()) / presentedCurrency.rateUsd;
     presentedCap = num.parse(presentedCap.toStringAsFixed(4));
     return presentedCap;
   }
@@ -47,12 +49,14 @@ class CoinCurrencyItem extends Equatable {
     return presentedVWAP;
   }
 
-  num getPresentedChangePercent() {
-    return num.parse(changePercent24Hr.toStringAsFixed(4));
+  num? getPresentedChangePercent() {
+    if (changePercent24Hr == null) return null;
+    return num.parse(num.parse(changePercent24Hr.toString()).toStringAsFixed(4));
   }
 
-  num getPresentedSupply() {
-    return num.parse(supply.toStringAsFixed(4));
+  num? getPresentedSupply() {
+    if (supply == null) return null;
+    return num.parse(num.parse(supply.toString()).toStringAsFixed(4));
   }
 
   num? getPresentedMaxSupply() {

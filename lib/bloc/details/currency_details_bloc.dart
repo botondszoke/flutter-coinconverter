@@ -29,12 +29,14 @@ class CurrencyDetailsBloc extends Bloc<CurrencyDetailsEvent, CurrencyDetailsStat
       }
     });
     on<ChangedCurrencyEvent>((event, emit) async {
-      try {
-        emit(Loading());
-        emit(Loaded(currency: event.currency, rates: event.rates));
-      } on Exception catch (e) {
-        print("Changing attributes successfully failed. ${e.toString()}");
-        emit(Error());
+      if (state is Loaded) {
+        try {
+          emit(Loading());
+          emit(Loaded(currency: event.currency, rates: event.rates));
+        } on Exception catch (e) {
+          print("Changing attributes successfully failed. ${e.toString()}");
+          emit(Error());
+        }
       }
     });
   }

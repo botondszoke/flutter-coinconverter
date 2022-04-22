@@ -15,33 +15,29 @@ class CurrencyListBloc extends Bloc<CurrencyListEvent, CurrencyListState> {
       this._currencyInteractor
       ) : super(Loading()) {
     on<LoadCurrenciesEvent> ((event, emit) async {
-      emit(Loading());
+      //emit(Loading());
       try {
-        final currencies = await _currencyInteractor.getCurrencies(event.searchParam);
+        final currencies = await _currencyInteractor.getCurrencies(
+            event.searchParam);
         print("Loading currencies successfully finished");
         emit(Loaded(currencies: currencies, searchParam: event.searchParam));
       } on Exception catch (e) {
         print("Loading currencies successfully failed. ${e.toString()}");
         emit(Error(currencies: [], searchParam: event.searchParam));
       }
-    },);
+    });
+    on<RefreshCurrenciesEvent> ((event, emit) async {
+      if (state is Loaded) {
+        emit(Refreshing());
+        try {
+          final currencies = await _currencyInteractor.getCurrencies(event.searchParam);
+          print("Loading currencies successfully finished");
+          emit(Loaded(currencies: currencies, searchParam: event.searchParam));
+        } on Exception catch (e) {
+          print("Loading currencies successfully failed. ${e.toString()}");
+          emit(Error(currencies: [], searchParam: event.searchParam));
+        }
+      }
+    });
   }
-
-  /*@override
-  Stream<CurrencyListState> mapEventToState(CurrencyListEvent event) async* {
-    if (event is LoadCurrenciesEvent) {
-      yield* _mapLoadCurrenciesToState();
-  }
-
-  Stream<CurrencyListState> _mapLoadCurrenciesToState() async* {
-    try {
-      print("Loading currencies from the API");
-      final currencies = await _currencyInteractor.getCurrencies();
-      print("Loading currencies successfully finished");
-      yield ContentReady(currencies: currencies);
-    } on Exception catch (e) {
-      print("Loading currencies successfully failed. ${e.toString()}");
-      yield Error(currencies: []);
-    }
-  }*/
 }

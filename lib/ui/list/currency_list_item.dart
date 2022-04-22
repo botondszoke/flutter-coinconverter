@@ -37,7 +37,7 @@ class _CurrencyListItemState extends State<CurrencyListItems> {
       },
       child: RefreshIndicator(
           onRefresh: () async {
-            BlocProvider.of<CurrencyListBloc>(context).add(LoadCurrenciesEvent(""));
+            BlocProvider.of<CurrencyListBloc>(context).add(RefreshCurrenciesEvent(""));
             return _refreshCompleter.future;
           },
           child: ListView.builder(
@@ -45,7 +45,6 @@ class _CurrencyListItemState extends State<CurrencyListItems> {
             itemBuilder: (context, index) {
               final item = state.currencies[index];
               return ListTile(
-                shape: RoundedRectangleBorder(),
                 leading: Icon(
                     Icons.monetization_on_rounded,
                     size: 30

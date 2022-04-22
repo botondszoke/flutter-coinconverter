@@ -52,12 +52,12 @@ extension on CCAssetsResponse {
       num.parse(e.rank),
       e.symbol,
       e.name,
-      num.parse(e.supply),
+      e.supply == null ? null : num.parse(e.supply.toString()),
       e.maxSupply == null ? null : num.parse(e.maxSupply.toString()),
-      num.parse(e.marketCapUsd),
-      num.parse(e.volumeUsd24Hr),
+      e.marketCapUsd == null ? null : num.parse(e.marketCapUsd.toString()),
+      e.volumeUsd24Hr == null ? null : num.parse(e.volumeUsd24Hr.toString()),
       num.parse(e.priceUsd),
-      num.parse(e.changePercent24Hr),
+      e.changePercent24Hr == null ? null : num.parse(e.changePercent24Hr.toString()),
       e.vwap24Hr == null ? null : num.parse(e.vwap24Hr.toString()),
       e.explorer
     )
@@ -72,12 +72,12 @@ extension on CCAssetResponse {
         num.parse(data.rank),
         data.symbol,
         data.name,
-        num.parse(data.supply),
+        data.supply == null ? null : num.parse(data.supply.toString()),
         data.maxSupply == null ? null : num.parse(data.maxSupply.toString()),
-        num.parse(data.marketCapUsd),
-        num.parse(data.volumeUsd24Hr),
+        data.marketCapUsd == null ? null : num.parse(data.marketCapUsd.toString()),
+        data.volumeUsd24Hr == null ? null : num.parse(data.volumeUsd24Hr.toString()),
         num.parse(data.priceUsd),
-        num.parse(data.changePercent24Hr),
+        data.changePercent24Hr == null ? null : num.parse(data.changePercent24Hr.toString()),
         data.vwap24Hr == null ? null : num.parse(data.vwap24Hr.toString()),
         data.explorer
     );

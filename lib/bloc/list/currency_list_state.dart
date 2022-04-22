@@ -13,6 +13,14 @@ class Loading extends CurrencyListState {
   Loading._();
 }
 
+class Refreshing extends CurrencyListState {
+  static final Refreshing _instance = Refreshing._();
+
+  factory Refreshing() => _instance;
+
+  Refreshing._();
+}
+
 abstract class Content extends CurrencyListState {
   final List<CoinCurrencyItem> currencies;
   final String searchParam;

@@ -107,7 +107,7 @@ class CurrencyDetails extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 0.0),
                                     child: Text(
-                                      "${currency.getPresentedMarketCap()} ${currency.presentedCurrency.currencySymbol ?? currency.presentedCurrency.symbol}",
+                                      currency.getPresentedMarketCap() == null ? l10n.notAvailable : "${currency.getPresentedMarketCap()} ${currency.presentedCurrency.currencySymbol ?? currency.presentedCurrency.symbol}",
                                       style: TextStyle(
                                         fontSize: 20,
                                       ),
@@ -137,7 +137,7 @@ class CurrencyDetails extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    currency.maxSupply != null ? "${currency.getPresentedSupply()} of ${currency.getPresentedMaxSupply()}" : "${currency.getPresentedSupply()}",
+                                    currency.getPresentedSupply() == null ? l10n.notAvailable : currency.maxSupply != null ? "${currency.getPresentedSupply()} of ${currency.getPresentedMaxSupply()}" : "${currency.getPresentedSupply()}",
                                     style: TextStyle(
                                       fontSize: 20,
                                     ),
@@ -158,7 +158,7 @@ class CurrencyDetails extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      "${currency.getPresentedVolume()} ${currency.presentedCurrency.currencySymbol ?? currency.presentedCurrency.symbol}",
+                                      currency.getPresentedVolume() == null ? l10n.notAvailable : "${currency.getPresentedVolume()} ${currency.presentedCurrency.currencySymbol ?? currency.presentedCurrency.symbol}",
                                       style: TextStyle(
                                         fontSize: 20,
                                       ),
@@ -179,10 +179,10 @@ class CurrencyDetails extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      "${currency.getPresentedChangePercent()} %",
+                                      currency.getPresentedChangePercent() == null ? l10n.notAvailable : "${currency.getPresentedChangePercent()} %",
                                       style: TextStyle(
                                         fontSize: 20,
-                                        color: currency.changePercent24Hr > 0 ? Colors.green : Colors.red
+                                        color: currency.changePercent24Hr == null ? Colors.black : num.parse(currency.changePercent24Hr.toString()) > 0 ? Colors.green : Colors.red
                                       ),
                                     ),
                                   ]
