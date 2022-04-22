@@ -19,10 +19,10 @@ class CurrencyListBloc extends Bloc<CurrencyListEvent, CurrencyListState> {
       try {
         final currencies = await _currencyInteractor.getCurrencies(
             event.searchParam);
-        print("Loading currencies successfully finished");
+        //print("Loading currencies successfully finished");
         emit(Loaded(currencies: currencies, searchParam: event.searchParam));
-      } on Exception catch (e) {
-        print("Loading currencies successfully failed. ${e.toString()}");
+      } on Exception /*catch (e)*/ {
+        //print("Loading currencies successfully failed. ${e.toString()}");
         emit(Error(currencies: [], searchParam: event.searchParam));
       }
     });
@@ -31,10 +31,10 @@ class CurrencyListBloc extends Bloc<CurrencyListEvent, CurrencyListState> {
         emit(Refreshing());
         try {
           final currencies = await _currencyInteractor.getCurrencies(event.searchParam);
-          print("Loading currencies successfully finished");
+          //print("Loading currencies successfully finished");
           emit(Loaded(currencies: currencies, searchParam: event.searchParam));
-        } on Exception catch (e) {
-          print("Loading currencies successfully failed. ${e.toString()}");
+        } on Exception /*catch (e)*/ {
+          //print("Loading currencies successfully failed. ${e.toString()}");
           emit(Error(currencies: [], searchParam: event.searchParam));
         }
       }
