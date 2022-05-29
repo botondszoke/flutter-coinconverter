@@ -16,3 +16,8 @@ class RefreshCurrenciesEvent extends CurrencyListEvent {
 
   RefreshCurrenciesEvent(this.searchParam);
 }
+
+class LanguageChangedEvent extends CurrencyListEvent {
+  final String languageCode;
+  LanguageChangedEvent(this.languageCode);
+}

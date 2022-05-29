@@ -17,14 +17,11 @@ class CurrencyDetailsBloc extends Bloc<CurrencyDetailsEvent, CurrencyDetailsStat
     on<LoadCurrencyEvent>((event, emit) async {
       try {
         final currency = await _currencyInteractor.getCurrencyById(event.id);
-        //print("Loading currency successfully finished");
 
         final rates = await _currencyInteractor.getRates();
-        //print("Loading rates successfully finished");
 
         emit(Loaded(currency: currency, rates: rates));
-      } on Exception /*catch (e)*/ {
-        //print("Loading data successfully failed. ${e.toString()}");
+      } on Exception {
         emit(Error());
       }
     });
@@ -33,8 +30,7 @@ class CurrencyDetailsBloc extends Bloc<CurrencyDetailsEvent, CurrencyDetailsStat
         try {
           emit(Loading());
           emit(Loaded(currency: event.currency, rates: event.rates));
-        } on Exception /*catch (e)*/ {
-          //print("Changing attributes successfully failed. ${e.toString()}");
+        } on Exception {
           emit(Error());
         }
       }

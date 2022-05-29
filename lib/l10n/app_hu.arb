@@ -1,0 +1,23 @@
+{
+  "@@locale": "hu",
+  "unknownCurrency": "Ismeretlen",
+  "currencyListTitle": "Coin Converter",
+  "snackbarLoadError": "Nem sikerült az árfolyamok betöltése.",
+  "unknownError": "Ismeretlen hiba történt :( Kérjük, indítsd újra az alkalmazást.",
+  "moreInfoButton": "TOVÁBBI ADATOK",
+  "noMoreInfoText": "Nincs további elérhető adat.",
+  "unknownCurrencyError": "Sajnos nem sikerült további információkat szerezni erről a valutáról. Kérjük, próbáld újra.",
+  "rank": "Helyezés",
+  "marketCap": "Piaci kapitalizáció",
+  "supply": "Elérhető kereskedhető mennyiség",
+  "volume": "Kereskedett mennyiség",
+  "change": "Változás",
+  "vwap": "Volumennel súlyozott átlagár",
+  "detailDescription": "A statisztikák az elmúlt 24 óra adatai alapján készültek.",
+  "selectCurrency": "Az adatok pénzneme",
+  "notAvailable": "Nem elérhető",
+  "price": "Ár",
+  "search": "Keresés",
+  "searchDialog": "Kriptovaluta keresése",
+  "cancel": "Mégse"
+}

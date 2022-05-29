@@ -1,9 +1,11 @@
 
+import 'package:coin_converter/bloc/list/currency_list_bloc.dart';
 import 'package:coin_converter/ui/details/currency_details.dart';
 import 'package:coin_converter/ui/list/currency_list.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'di/di_utils.dart';
 
 void main() {
@@ -13,9 +15,35 @@ void main() {
 }
 
 const DETAIL_PAGE = "/details";
+class CoinConverterApp extends StatefulWidget {
+  CoinConverterApp({Key? key}) : super(key: key);
+  @override
+  CoinConverterAppState createState() => new CoinConverterAppState();
+}
+class CoinConverterAppState extends State<CoinConverterApp> {
 
-class CoinConverterApp extends StatelessWidget {
-  const CoinConverterApp({Key? key}) : super(key: key);
+  late Locale locale;
+
+  @override
+  void initState() {
+    locale = L10n.supportedLocales[0];
+    super.initState();
+    readDefaultValue();
+  }
+
+  void changeLocale(Locale l) {
+    setState(() {
+      locale = l;
+    });
+  }
+
+  void readDefaultValue() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? languageCode = await prefs.getString(CurrencyListBloc.CURRENT_LANGUAGE_KEY);
+    if (languageCode != null) {
+      changeLocale(Locale(languageCode));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +57,10 @@ class CoinConverterApp extends StatelessWidget {
               primarySwatch: Colors.amber,
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
-            home: CurrencyListPage(),
+            home: CurrencyListPage(changeLocale: changeLocale),
             localizationsDelegates: L10n.localizationsDelegates,
             supportedLocales: L10n.supportedLocales,
+            locale: locale,
             onGenerateRoute: (settings) {
               final name = settings.name ?? "";
               if (name.startsWith(DETAIL_PAGE)) {
@@ -54,18 +83,22 @@ class CoinConverterApp extends StatelessWidget {
               return null;
             },
             onUnknownRoute: (route) {
-              //TODO: Kéne error page :)
-              //return MaterialPageRoute()
+              //TODO: error page
             },
           );
         }
         return Container(
-          color: Colors.black,
           child: Center(
-            child: CircularProgressIndicator(color: Colors.green,),
+            child: CircularProgressIndicator(color: Colors.amber,),
           ),
         );
       },
     );
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
