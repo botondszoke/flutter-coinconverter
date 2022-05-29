@@ -16,30 +16,12 @@ void initDependencies() {
     CCNetworkDataSource(injector<CCApi>()),
   );
 
-  /*injector.registerSingletonAsync<ArticleDao>(() async {
-    final database = await $FloorFloorArticleDatabase
-        .databaseBuilder("nyt_database.db")
-        .build();
-    return database.articleDao;
-  });
-
-  injector.registerSingletonAsync(
-        () async {
-      return ArticleDiskDataSource(
-        injector<ArticleDao>(),
-      );
-    },
-    dependsOn: [ArticleDao],
-  );*/
-
   injector.registerSingletonAsync(
         () async {
       return CurrencyInteractor(
-        //injector<ArticleDiskDataSource>(),
         injector<CCNetworkDataSource>(),
       );
     },
-    //dependsOn: [ArticleDiskDataSource],
   );
 
   injector.registerFactory(

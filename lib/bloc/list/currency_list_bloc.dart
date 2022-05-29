@@ -22,12 +22,19 @@ class CurrencyListBloc extends Bloc<CurrencyListEvent, CurrencyListState> {
       this._currencyInteractor
       ) : super(Loading()) {
     on<LoadCurrenciesEvent> ((event, emit) async {
-      String languageCode = "";
       try {
-        final currencies = await _currencyInteractor.getCurrencies(event.searchParam);
 
         final prefs = await SharedPreferences.getInstance();
-        languageCode = await prefs.getString(CURRENT_LANGUAGE_KEY) ?? "en";
+        String languageCode = await prefs.getString(CURRENT_LANGUAGE_KEY) ?? "en";
+
+        final currencies = await _currencyInteractor.getCurrencies(event.searchParam);
+
+        if (languageCode == "hu") {
+          final rates = await _currencyInteractor.getRates();
+          for (var e in currencies) {
+            e.setPresentedCurrency(rates.singleWhere((element) => element.symbol == "HUF"));
+          }
+        }
 
         emit(Loaded(currencies: currencies, searchParam: event.searchParam));
       } on Exception {
@@ -37,12 +44,18 @@ class CurrencyListBloc extends Bloc<CurrencyListEvent, CurrencyListState> {
     on<RefreshCurrenciesEvent> ((event, emit) async {
       if (state is Loaded) {
         emit(Refreshing());
-        String languageCode = "";
         try {
+          final prefs = await SharedPreferences.getInstance();
+          String languageCode = await prefs.getString(CURRENT_LANGUAGE_KEY) ?? "en";
+
           final currencies = await _currencyInteractor.getCurrencies(event.searchParam);
 
-          final prefs = await SharedPreferences.getInstance();
-          languageCode = await prefs.getString(CURRENT_LANGUAGE_KEY) ?? "en";
+          if (languageCode == "hu") {
+            final rates = await _currencyInteractor.getRates();
+            for (var e in currencies) {
+              e.setPresentedCurrency(rates.singleWhere((element) => element.symbol == "HUF"));
+            }
+          }
 
           emit(Loaded(currencies: currencies, searchParam: event.searchParam));
         } on Exception {
@@ -53,7 +66,6 @@ class CurrencyListBloc extends Bloc<CurrencyListEvent, CurrencyListState> {
     on<LanguageChangedEvent> ((event, emit) async {
       if (state is Loaded) {
         try {
-          print("Megkezdem az addolást");
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString(CURRENT_LANGUAGE_KEY, event.languageCode);
 

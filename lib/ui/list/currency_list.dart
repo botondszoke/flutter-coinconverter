@@ -11,7 +11,7 @@ import 'currency_list_item.dart';
 class CurrencyListPage extends StatelessWidget {
   final Function(Locale l) changeLocale;
   CurrencyListPage({Key? key, required this.changeLocale}) : super(key: key);
-
+  String lastSearchTerm = "";
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context)!;
@@ -33,9 +33,9 @@ class CurrencyListPage extends StatelessWidget {
                     return PopupMenuButton<String>(
                       onSelected: (value) {
                         if (Localizations.localeOf(context).languageCode != value && L10n.supportedLocales.contains(Locale(value))) {
-                          BlocProvider.of<CurrencyListBloc>(context)
-                              .add(LanguageChangedEvent(value));
+                          BlocProvider.of<CurrencyListBloc>(context).add(LanguageChangedEvent(value));
                           changeLocale(Locale(value));
+                          BlocProvider.of<CurrencyListBloc>(context).add(RefreshCurrenciesEvent(lastSearchTerm));
                         }
                       },
                       itemBuilder: (context) {
@@ -70,12 +70,10 @@ class CurrencyListPage extends StatelessWidget {
             child: BlocBuilder<CurrencyListBloc, CurrencyListState>(
               builder: (context, state) {
                 if (state is Loading) {
-                  BlocProvider.of<CurrencyListBloc>(context)
-                    .add(LoadCurrenciesEvent(""));
+                  BlocProvider.of<CurrencyListBloc>(context).add(LoadCurrenciesEvent(lastSearchTerm));
                   return CurrencyListLoading();
                 }
                 if (state is Loaded) {
-                  print("help");
                   return CurrencyListItems(state);
                 }
                 if (state is Refreshing) {
@@ -98,7 +96,8 @@ class CurrencyListPage extends StatelessWidget {
                     if (state is Loaded) {
                       var result = await showSearchDialog(context, l10n);
                       if (result != null) {
-                        BlocProvider.of<CurrencyListBloc>(context).add(RefreshCurrenciesEvent(result));
+                        lastSearchTerm = result;
+                        BlocProvider.of<CurrencyListBloc>(context).add(RefreshCurrenciesEvent(lastSearchTerm));
                       }
                     }
                   },
@@ -120,7 +119,7 @@ class CurrencyListPage extends StatelessWidget {
           title: Text(l10n.searchDialog),
           content: TextField(
             decoration: const InputDecoration(
-              labelText: "ETH, Bitcoin, etc.",
+              labelText: "ETH, Bitcoin, ...",
             ),
             onChanged: (text) {
               searchParam = text;
